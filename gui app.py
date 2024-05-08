@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
-from tempconv import ftin_to_mcm  # Import function
+from tkinter import *
+from tempconv import ftin_to_mcm
 from tempconv import lbs_to_kg
 from tempconv import f_to_c_conv
 
@@ -29,8 +30,13 @@ def convert_ftoc():
     except ValueError:
         messagebox.showerror('Error', 'Please enter valid numerical value for Fahrenheit.')
 
+def on_select(event):
+    index=sideb.curselection()
 
-# Create the main window
+    if index:
+
+
+
 root = tk.Tk()
 root.title("Tiny converter")
 
@@ -38,9 +44,23 @@ root.config(
     bg='#CCCCFF'
 )
 
-# Create labels and entry widgets
+sideb = Listbox(root)
+
+sideb.insert(1, 'Temperature'),
+sideb.insert(2, 'Weight')
+sideb.insert(3, 'Height')
+sideb.grid(
+    row=0,
+    column=0,
+    rowspan=4,
+    padx=10,
+    pady=10
+)
+
+
+
 label_feet = tk.Label(root, text="Feet:")
-label_feet.grid(row=0, column=0)
+label_feet.grid(row=0, column=1)
 entry_feet = tk.Entry(root)
 entry_feet.grid(row=0, column=1)
 
@@ -60,7 +80,7 @@ entry_f = tk.Entry(root)
 entry_f.grid(row=3, column=1)
 
 
-# Create convert button
+
 btn_conv_ftinch = tk.Button(
     root,
     text="Convert",
