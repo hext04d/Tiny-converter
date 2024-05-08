@@ -30,10 +30,33 @@ def convert_ftoc():
     except ValueError:
         messagebox.showerror('Error', 'Please enter valid numerical value for Fahrenheit.')
 
+def clear_entries():
+    # Clear entry widgets
+    entry_feet.delete(0, tk.END)
+    entry_inches.delete(0, tk.END)
+    entry_lbs.delete(0, tk.END)
+    entry_f.delete(0, tk.END)   
+
 def on_select(event):
     index=sideb.curselection()
 
-    if index:
+    if index: 
+        selected = sideb.get(index)
+        if selected == 'Temperature':
+            clear_entries()
+            label_f.config(text='Fahrenheit')
+            btn_conv_ftoc.config(command=convert_ftoc)
+        elif selected== 'Weight':
+            clear_entries()
+            label_lbs.config(text='LBS/Pounds:')
+            btn_conv_lbs.config(command=convert_lbskg)
+        elif selected == "Height":
+            # Show height conversion options
+            clear_entries()
+            label_feet.config(text="Feet:")
+            label_inches.config(text="Inches:")
+            btn_conv_ftinch.config(command="")
+            btn_conv_ftoc.config(command=convert_ftoc)
 
 
 
