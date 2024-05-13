@@ -11,6 +11,10 @@ def convert_ftinch():
         inches = float(entry_inches.get())
         conv = Conversion(None, None, feet, inches)  # Create a Conversion instance
         meters, centimeters = conv.ftin_to_mcm()  # Call the method on the instance
+        feet = float(entry_feet.get())
+        inches = float(entry_inches.get())
+        conv = Conversion(None, None, feet, inches)  # Create a Conversion instance
+        meters, centimeters = conv.ftin_to_mcm()  # Call the method on the instance
         messagebox.showinfo("Conversion Result", f"Meters: {meters}\nCentimeters: {centimeters:.1f}")
     except ValueError:
         messagebox.showerror("Error", "Please enter valid numerical values for feet and inches.")
@@ -18,6 +22,8 @@ def convert_ftinch():
 def convert_lbskg():
     try:
         lbs = float(entry_lbs.get())
+        conv = Conversion(None, lbs, None, None)  # Create a Conversion instance
+        kg = conv.lbs_to_kg()  # Call the method on the instance
         conv = Conversion(None, lbs, None, None)  # Create a Conversion instance
         kg = conv.lbs_to_kg()  # Call the method on the instance
         messagebox.showinfo('Conversion Result', f'Killograms: {kg}')
@@ -29,13 +35,21 @@ def convert_ftoc():
         f = float(entry_f.get())
         conv = Conversion(f, None, None, None)  # Create a Conversion instance
         celsius = conv.f_to_celsius()  # Call the method on the instance
+        conv = Conversion(f, None, None, None)  # Create a Conversion instance
+        celsius = conv.f_to_celsius()  # Call the method on the instance
         messagebox.showinfo('Conversion Result', f'Celsius: {celsius}')
     except ValueError:
         messagebox.showerror('Error', 'Please enter valid numerical value for Fahrenheit.')
 
 # GUI code starts here
 
+# GUI code starts here
+
 def clear_entries():
+    entry_feet.delete(0, ttk.END)
+    entry_inches.delete(0, ttk.END)
+    entry_lbs.delete(0, ttk.END)
+    entry_f.delete(0, ttk.END)   
     entry_feet.delete(0, ttk.END)
     entry_inches.delete(0, ttk.END)
     entry_lbs.delete(0, ttk.END)
@@ -49,7 +63,10 @@ root.title("Tiny converter")
 
 sv_ttk.set_theme("dark")
 
+sv_ttk.set_theme("dark")
+
 root.config(
+    #bg='#CCCCFF'
     #bg='#CCCCFF'
 )
 
@@ -81,14 +98,18 @@ def on_select(event):
 sideb = Listbox(root)
 
 sideb.insert(1, 'Temperature')
+sideb.insert(1, 'Temperature')
 sideb.insert(2, 'Weight')
 sideb.insert(3, 'Height')
+sideb.bind('<<ListboxSelect>>', on_select)
 sideb.bind('<<ListboxSelect>>', on_select)
 sideb.grid(
     row=0,
     column=0,
     rowspan=4,
     padx=10,
+    pady=10,
+    sticky='ns'
     pady=10,
     sticky='ns'
 )
