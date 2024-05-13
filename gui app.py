@@ -1,11 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
-import sv_ttk
 from tkinter import messagebox
 from tkinter import *
 from tempconv import Conversion
-
-
+import sv_ttk
 
 def convert_ftinch():
     try:
@@ -43,44 +41,8 @@ def clear_entries():
     entry_lbs.delete(0, ttk.END)
     entry_f.delete(0, ttk.END)   
 
-def on_select(event):
-    index = sideb.curselection()
-    print("Selection event triggered")
-    print("Index:", index)
-
-    if index:
-        selected = sideb.get(index[0]) 
-        print("Selected item:", selected)
-
-        if selected == 'Temperature':
-            # Update labels and commands for temperature conversion
-            label_f.config(text='Fahrenheit:')
-            label_feet.config(text='')
-            label_inches.config(text='')
-            btn_conv_ftinch.config(command='')
-            btn_conv_lbs.config(command='')
-            btn_conv_ftoc.config(command=convert_ftoc)
-        elif selected == 'Weight':
-            # Update labels and commands for weight conversion
-            label_lbs.config(text='Pounds:')
-            label_f.config(text='')
-            label_feet.config(text='')
-            label_inches.config(text='')
-            btn_conv_ftinch.config(command='')
-            btn_conv_ftoc.config(command='')
-            btn_conv_lbs.config(command=convert_lbskg)
-        elif selected == 'Height':
-            # Update labels and commands for height conversion
-            label_feet.config(text='Feet:')
-            label_inches.config(text='Inches:')
-            label_f.config(text='')
-            label_lbs.config(text='')
-            btn_conv_ftoc.config(command='')
-            btn_conv_lbs.config(command='')
-            btn_conv_ftinch.config(command=convert_ftinch)
-    else:
-        print("No item selected")
-
+def SceneSwitch(frame):
+    frame.tkraise()
 
 root = tk.Tk()
 root.title("Tiny converter")
@@ -90,6 +52,31 @@ sv_ttk.set_theme("dark")
 root.config(
     #bg='#CCCCFF'
 )
+
+f1 = Frame(root)  # Home
+f2 = Frame(root)  # Temp
+f3 = Frame(root)  # Weight
+f4 = Frame(root)  # Height
+
+for frame in (f1, f2, f3, f4):
+    frame.grid(row=0, column=2, sticky='nsew')  # Stack frames on top of each other
+
+def on_select(event):
+    index = sideb.curselection()
+
+    if index:
+        selected = sideb.get(index[0])
+        if selected == 'Temperature':
+            SceneSwitch(f2)
+            print('selected f2')
+        elif selected == 'Weight':
+            SceneSwitch(f3)
+            print('selected f3')
+        elif selected == 'Height':
+            SceneSwitch(f4)
+            print('selected f4')
+        else:
+            SceneSwitch(f1)
 
 sideb = Listbox(root)
 
@@ -106,46 +93,44 @@ sideb.grid(
     sticky='ns'
 )
 
-label_feet = ttk.Label(root, text="Feet:")
-label_feet.grid(row=0, column=1)
-entry_feet = ttk.Entry(root)
-entry_feet.grid(row=1, column=2)
+label_feet = ttk.Label(f4, text="Feet:")
+label_feet.grid(row=0, column=0)
+entry_feet = ttk.Entry(f4)
+entry_feet.grid(row=1, column=1)
 
-label_inches = ttk.Label(root, text="Inches:")
-label_inches.grid(row=1, column=0)
-entry_inches = ttk.Entry(root)
-entry_inches.grid(row=1, column=2)
+label_inches = ttk.Label(f4, text="Inches: ")
+label_inches.grid(row=2, column=0)
+entry_inches = ttk.Entry(f4)
+entry_inches.grid(row=3, column=1)
 
-label_lbs = ttk.Label(root, text="Pounds:")
-label_lbs.grid(row=2, column=0)
-entry_lbs = ttk.Entry(root)
+label_lbs = ttk.Label(f3, text="Pounds: ")
+label_lbs.grid(row=1, column=1)
+entry_lbs = ttk.Entry(f3)
 entry_lbs.grid(row=2, column=2)
 
-label_f = ttk.Label(root, text='Fahrenheit:')
-label_f.grid(row=3, column=0)
-entry_f = ttk.Entry(root)
-entry_f.grid(row=3, column=2)
+label_f = ttk.Label(f2, text='Fahrenheit: ')
+label_f.grid(row=1, column=0)
+entry_f = ttk.Entry(f2)
+entry_f.grid(row=2, column=1)
 
 btn_conv_ftinch = ttk.Button(
-    root,
+    f4,
     text="Convert",
     command=convert_ftinch)
-btn_conv_ftinch.grid(row=1, column=2, columnspan=1)
+btn_conv_ftinch.grid(row=4, column=1, columnspan=1)
 
 btn_conv_lbs = ttk.Button(
-    root,
+    f3,
     text='Convert',
     command=convert_lbskg
 )
-btn_conv_lbs.grid(row=2, column=2,columnspan=3)
+btn_conv_lbs.grid(row=4, column=2, columnspan=3)
 
 btn_conv_ftoc = ttk.Button(
-    root,
-    text = 'Convert',
+    f2,
+    text='Convert',
     command=convert_ftoc
-
 )
-btn_conv_ftoc.grid(row=3, column=2, columnspan=1)
-
+btn_conv_ftoc.grid(row=3, column=1, columnspan=3)
 
 root.mainloop()
