@@ -1,16 +1,21 @@
-mainprog = True
+class Conversion:
+    def __init__(self, fahrenheit, pounds, feet, inches):
+        self.fahrenheit = fahrenheit
+        self.pounds = pounds
+        self.feet = feet
+        self.inches = inches
+    
+    def f_to_celsius(self):
+        celsius = (5 / 9) * (float(self.fahrenheit) - 32)
+        return round(celsius, 2)
+    
+    def lbs_to_kg(self):
+        kg = float(self.pounds) / 2.205
+        return round(kg, 2)
+    
 
-def f_to_c_conv(f): #converts fahrenheit to celsius
-    celsius = (5/9) * (float(f)-32)
-    result = round (celsius,2)
-    return float(result)
-
-def lbs_to_kg(lbs):#converts lbs to kg
-    kg = (float(lbs)) / 2.205
-    return float(round(kg, 2))
-
-def ftin_to_mcm(ft, inch):#converts feet and inch to meters and centimeters
-    ftin = (inch / 12) + ft
-    mtrs = ftin / 3.281
-    cm = (mtrs - int(mtrs)) * 100  # Calculate remaining centimeters
-    return int(mtrs), cm  # Return meters and centimeters as a tuple
+    def ftin_to_mcm(self):
+        ftin = (self.inches / 12) + self.feet
+        meters = ftin / 3.281
+        cm = (meters - int(meters)) * 100
+        return int(meters), cm
