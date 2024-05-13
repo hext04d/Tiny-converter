@@ -98,7 +98,6 @@ def on_select(event):
 sideb = Listbox(root)
 
 sideb.insert(1, 'Temperature')
-sideb.insert(1, 'Temperature')
 sideb.insert(2, 'Weight')
 sideb.insert(3, 'Height')
 sideb.bind('<<ListboxSelect>>', on_select)
@@ -109,9 +108,7 @@ sideb.grid(
     rowspan=4,
     padx=10,
     pady=10,
-    sticky='ns'
-    pady=10,
-    sticky='ns'
+    sticky='ns',
 )
 
 label_feet = ttk.Label(f4, text="Feet:")
