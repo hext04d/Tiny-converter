@@ -5,6 +5,7 @@ from tkinter import *
 from tempconv import Conversion
 import sv_ttk
 
+
 def convert_ftinch():
     try:
         feet = float(entry_feet.get())
@@ -19,6 +20,7 @@ def convert_ftinch():
     except ValueError:
         messagebox.showerror("Error", "Please enter valid numerical values for feet and inches.")
 
+
 def convert_lbskg():
     try:
         lbs = float(entry_lbs.get())
@@ -29,6 +31,7 @@ def convert_lbskg():
         messagebox.showinfo('Conversion Result', f'Killograms: {kg}')
     except ValueError:
         messagebox.showerror("Error", "Please enter valid numerical value for LBS/pounds.")
+
 
 def convert_ftoc():
     try:
@@ -41,7 +44,6 @@ def convert_ftoc():
     except ValueError:
         messagebox.showerror('Error', 'Please enter valid numerical value for Fahrenheit.')
 
-# GUI code starts here
 
 # GUI code starts here
 
@@ -49,14 +51,16 @@ def clear_entries():
     entry_feet.delete(0, ttk.END)
     entry_inches.delete(0, ttk.END)
     entry_lbs.delete(0, ttk.END)
-    entry_f.delete(0, ttk.END)   
+    entry_f.delete(0, ttk.END)
     entry_feet.delete(0, ttk.END)
     entry_inches.delete(0, ttk.END)
     entry_lbs.delete(0, ttk.END)
-    entry_f.delete(0, ttk.END)   
+    entry_f.delete(0, ttk.END)
+
 
 def SceneSwitch(frame):
     frame.tkraise()
+
 
 root = tk.Tk()
 root.title("Tiny converter")
@@ -67,7 +71,6 @@ sv_ttk.set_theme("dark")
 
 root.config(
     #bg='#CCCCFF'
-    #bg='#CCCCFF'
 )
 
 f1 = Frame(root)  # Home
@@ -77,6 +80,7 @@ f4 = Frame(root)  # Height
 
 for frame in (f1, f2, f3, f4):
     frame.grid(row=0, column=2, sticky='nsew')  # Stack frames on top of each other
+
 
 def on_select(event):
     index = sideb.curselection()
@@ -94,6 +98,7 @@ def on_select(event):
             print('selected f4')
         else:
             SceneSwitch(f1)
+
 
 sideb = Listbox(root)
 
