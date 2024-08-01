@@ -7,7 +7,7 @@ A simple GUI application for temperature, weight, and length conversions.
 Clone the repository:
 
 ```bash
-git clone https://github.com/YourUsername/Tiny-converter.git
+git clone https://github.com/Hext04d/Tiny-converter.git
 ```
 
 ## Usage
