@@ -10,11 +10,7 @@ def convert_ftinch():
         feet = float(entry_feet.get())
         inches = float(entry_inches.get())
         conv = Conversion(None, None, feet, inches)  # Create a Conversion instance
-        meters, centimeters = conv.ftin_to_mcm()  # Call the method on the instance
-        feet = float(entry_feet.get())
-        inches = float(entry_inches.get())
-        conv = Conversion(None, None, feet, inches)  # Create a Conversion instance
-        meters, centimeters = conv.ftin_to_mcm()  # Call the method on the instance
+        meters, centimeters = conv.ftin_to_mcm() 
         messagebox.showinfo("Conversion Result", f"Meters: {meters}\nCentimeters: {centimeters:.1f}")
     except ValueError:
         messagebox.showerror("Error", "Please enter valid numerical values for feet and inches.")
@@ -22,8 +18,6 @@ def convert_ftinch():
 def convert_lbskg():
     try:
         lbs = float(entry_lbs.get())
-        conv = Conversion(None, lbs, None, None)  # Create a Conversion instance
-        kg = conv.lbs_to_kg()  # Call the method on the instance
         conv = Conversion(None, lbs, None, None)  # Create a Conversion instance
         kg = conv.lbs_to_kg()  # Call the method on the instance
         messagebox.showinfo('Conversion Result', f'Killograms: {kg}')
@@ -35,13 +29,9 @@ def convert_ftoc():
         f = float(entry_f.get())
         conv = Conversion(f, None, None, None)  # Create a Conversion instance
         celsius = conv.f_to_celsius()  # Call the method on the instance
-        conv = Conversion(f, None, None, None)  # Create a Conversion instance
-        celsius = conv.f_to_celsius()  # Call the method on the instance
         messagebox.showinfo('Conversion Result', f'Celsius: {celsius}')
     except ValueError:
         messagebox.showerror('Error', 'Please enter valid numerical value for Fahrenheit.')
-
-# GUI code starts here
 
 # GUI code starts here
 
@@ -63,10 +53,7 @@ root.title("Tiny converter")
 
 sv_ttk.set_theme("dark")
 
-sv_ttk.set_theme("dark")
-
 root.config(
-    #bg='#CCCCFF'
     #bg='#CCCCFF'
 )
 
